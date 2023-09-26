@@ -18,7 +18,12 @@ class ContactManagerTest {
         Assertions.assertEquals(1,contactManager.getAllContacts().size());
     }
 
- 
+
+    //under tester jeg ved bruk av exception
+    //i ContactManager klassen er det en funksjon som heter validateContact validerer
+    // som kontakten.
+    //lager en test som validerer feil verdier
+    //assertThrows --> bruker exception klassen 
     @Test
     @DisplayName("Should Not Create Contact When Last Name is Null")
     public void shouldThrowRunTimeExceptionWhenFirstNameIsNull(){
