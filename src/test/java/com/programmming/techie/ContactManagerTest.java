@@ -3,7 +3,11 @@ package com.programmming.techie;
 import com.programming.techie.ContactManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -86,7 +90,22 @@ class ContactManagerTest {
         contactManager.addContact("John", "Doe", phoneNumber);
         assertFalse(contactManager.getAllContacts().isEmpty());
         assertEquals(1, contactManager.getAllContacts().size());
+
+        //bruker methodSource under
+        //samme eksempel over bare vi bruker methodsource her
+    } @DisplayName("Testing Contant Creation Using MethodSource")
+    @ParameterizedTest
+    @MethodSource("phoneNumberList")
+    public void shouldTestContactCreationUsingMethodSource(String phoneNumber){
+        contactManager.addContact("John", "Doe", phoneNumber);
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
     }
+
+    private static List<String> phoneNumberList(){
+        return Arrays.asList("0789456123", "0147852369", "0123456789");
+    }
+
 
 
 
