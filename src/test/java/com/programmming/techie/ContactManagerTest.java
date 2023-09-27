@@ -3,6 +3,7 @@ package com.programmming.techie;
 import com.programming.techie.ContactManager;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -93,10 +94,10 @@ class ContactManagerTest {
 
         //bruker methodSource under
         //samme eksempel over bare vi bruker methodsource her
-    } @DisplayName("Testing Contant Creation Using MethodSource")
+    } @DisplayName("Method Source Case - Phone Number should match the required Format")
     @ParameterizedTest
     @MethodSource("phoneNumberList")
-    public void shouldTestContactCreationUsingMethodSource(String phoneNumber){
+    public void shouldTestPhoneNumberFormatUsingMethodSource(String phoneNumber){
         contactManager.addContact("John", "Doe", phoneNumber);
         assertFalse(contactManager.getAllContacts().isEmpty());
         assertEquals(1, contactManager.getAllContacts().size());
@@ -105,6 +106,17 @@ class ContactManagerTest {
     private static List<String> phoneNumberList(){
         return Arrays.asList("0789456123", "0147852369", "0123456789");
     }
+
+    //CSV Source Fil --> Komma separerte filer
+    @DisplayName("CSV Source Case - Phone Number should match the required Format")
+    @ParameterizedTest
+    @CsvSource({"0789456123", "0147852369", "0123456789"})
+    public void shouldTestPhoneNumberFormatUsingCSVSource(String phoneNumber){
+        contactManager.addContact("John", "Doe", phoneNumber);
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
+    }
+
 
 
 
