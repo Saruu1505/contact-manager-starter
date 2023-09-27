@@ -2,6 +2,8 @@ package com.programmming.techie;
 
 import com.programming.techie.ContactManager;
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -72,5 +74,21 @@ class ContactManagerTest {
         assertFalse(contactManager.getAllContacts().isEmpty());
         assertEquals(1, contactManager.getAllContacts().size());
     }
+
+    //bruker parametrisert tester
+    //skal validere telefonnummer
+    //sjekk ut validatePhoneNumber metoden i Contact-class
+    //bruker @ValueSource i første eksempel
+    @DisplayName("Testing Contant Creation Using ValueSource")
+    @ParameterizedTest
+    @ValueSource(strings = {"0789456123", "0147852369", "0123456789"})
+    public void shouldTestContactCreationUsingValueSource(String phoneNumber){
+        contactManager.addContact("John", "Doe", phoneNumber);
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
+    }
+
+
+
 
 }
