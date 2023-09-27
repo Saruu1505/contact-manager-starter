@@ -52,7 +52,6 @@ class ContactManagerTest {
             contactManager.addContact("null", "Doe", null);
         });
     }
-
     @AfterEach
     public void tearDown() {
         System.out.println("Should execute After Each Test");
@@ -62,4 +61,16 @@ class ContactManagerTest {
     public void tearDownAll() {
         System.out.println("Should execute at the end of the test");
     }
+
+    //bruker annotasjon repeated test
+    //value --> kjøres testen x antall ganger
+    @DisplayName("Repeat Contact Creation Test 5 Times")
+    @RepeatedTest(value = 5,
+            name = "Repeating Contact Creation Test {currentRepetition} of {totalRepetitions}" )
+    public void shouldTestContactCreationRepeatedly(){
+        contactManager.addContact("John", "Doe", "0123456789");
+        assertFalse(contactManager.getAllContacts().isEmpty());
+        assertEquals(1, contactManager.getAllContacts().size());
+    }
+
 }
